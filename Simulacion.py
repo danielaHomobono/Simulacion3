@@ -61,3 +61,43 @@ if p_value < 0.05:
     print("Existe una diferencia significativa en el salario mensual bruto entre hombres y mujeres.")
 else:
     print("No existe una diferencia significativa en el salario mensual bruto entre hombres y mujeres.")
+
+# Análisis comparativo por seniority
+df_seniority = df[['ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda_local', 'seniority']].dropna()
+seniority_groups = df_seniority.groupby('seniority')
+
+# Salario medio por seniority
+salario_medio_seniority = seniority_groups.mean()
+print(salario_medio_seniority)
+
+# Boxplot del salario bruto mensual por seniority
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='seniority', y='ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda_local', data=df_seniority)
+plt.title('Boxplot del Salario Bruto Mensual por Seniority')
+plt.xlabel('Seniority')
+plt.ylabel('Salario Bruto Mensual (en moneda local)')
+plt.show()
+
+# Análisis comparativo por región
+df_region = df[['ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda_local', 'estoy_trabajando_en']].dropna()
+region_groups = df_region.groupby('estoy_trabajando_en')
+
+# Salario medio por región
+salario_medio_region = region_groups.mean()
+print(salario_medio_region)
+
+# Boxplot del salario bruto mensual por región
+plt.figure(figsize=(10, 6))
+sns.boxplot(x='estoy_trabajando_en', y='ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda_local', data=df_region)
+plt.title('Boxplot del Salario Bruto Mensual por Región')
+plt.xlabel('Región')
+plt.ylabel('Salario Bruto Mensual (en moneda local)')
+plt.show()
+
+# Análisis de correlación (seleccionando solo columnas numéricas)
+numerical_df = df.select_dtypes(include=[np.number])
+correlation_matrix = numerical_df.corr()
+plt.figure(figsize=(12, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
+plt.title('Heatmap de la Correlación entre Variables')
+plt.show()
