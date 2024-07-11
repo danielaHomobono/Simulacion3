@@ -23,7 +23,8 @@ plt.figure(figsize=(10, 6))
 sns.boxplot(x=salario_bruto)
 plt.title('Boxplot del Salario Bruto Mensual')
 plt.xlabel('Salario Bruto Mensual (en moneda local)')
-plt.show()
+plt.savefig('boxplot_salario.png')  # Guardar gráfico
+plt.close()
 
 # Histograma del salario bruto mensual
 plt.figure(figsize=(10, 6))
@@ -31,7 +32,8 @@ sns.histplot(salario_bruto, kde=True)
 plt.title('Histograma del Salario Bruto Mensual')
 plt.xlabel('Salario Bruto Mensual (en moneda local)')
 plt.ylabel('Frecuencia')
-plt.show()
+plt.savefig('histograma_salario.png')  # Guardar gráfico
+plt.close()
 
 # Análisis comparativo por género
 df_genero = df[['ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda_local', 'me_identifico_genero']].dropna()
@@ -47,7 +49,8 @@ sns.boxplot(x='me_identifico_genero', y='ultimo_salario_mensual_o_retiro_bruto_e
 plt.title('Boxplot del Salario Bruto Mensual por Género')
 plt.xlabel('Género')
 plt.ylabel('Salario Bruto Mensual (en moneda local)')
-plt.show()
+plt.savefig('boxplot_salario_genero.png')  # Guardar gráfico
+plt.close()
 
 # Test t de Student para comparar salarios entre géneros
 hombres = df_genero[df_genero['me_identifico_genero'] == 'Hombre']['ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda_local']
@@ -76,7 +79,8 @@ sns.boxplot(x='seniority', y='ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda
 plt.title('Boxplot del Salario Bruto Mensual por Seniority')
 plt.xlabel('Seniority')
 plt.ylabel('Salario Bruto Mensual (en moneda local)')
-plt.show()
+plt.savefig('boxplot_salario_seniority.png')  # Guardar gráfico
+plt.close()
 
 # Análisis comparativo por región
 df_region = df[['ultimo_salario_mensual_o_retiro_bruto_en_tu_moneda_local', 'estoy_trabajando_en']].dropna()
@@ -92,7 +96,8 @@ sns.boxplot(x='estoy_trabajando_en', y='ultimo_salario_mensual_o_retiro_bruto_en
 plt.title('Boxplot del Salario Bruto Mensual por Región')
 plt.xlabel('Región')
 plt.ylabel('Salario Bruto Mensual (en moneda local)')
-plt.show()
+plt.savefig('boxplot_salario_region.png')  # Guardar gráfico
+plt.close()
 
 # Análisis de correlación (seleccionando solo columnas numéricas)
 numerical_df = df.select_dtypes(include=[np.number])
@@ -100,4 +105,5 @@ correlation_matrix = numerical_df.corr()
 plt.figure(figsize=(12, 8))
 sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', fmt=".2f")
 plt.title('Heatmap de la Correlación entre Variables')
-plt.show()
+plt.savefig('heatmap_correlacion.png')  # Guardar gráfico
+plt.close()
